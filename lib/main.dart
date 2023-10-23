@@ -9,16 +9,15 @@ import 'package:signin_page/screens/SigninPage.dart';
 
 
 
-
 void main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => HomeScreen(),
+      '/': (context) => const HomeScreen(),
       '/Second': (context) => SigninPage(),
       '/Third': (context) => Register(),
       '/Fourth': (context) => ForgotPassword(),
-      '/Fifth': (context) => LogOutScreen(),
+      '/Fifth': (context) => const LogOutScreen(),
     },
   ));
 }

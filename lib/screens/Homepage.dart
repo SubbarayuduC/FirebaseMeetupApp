@@ -4,14 +4,19 @@ void main(){
   runApp(const HomeScreen());
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-
+      key: formKey,
       home: Scaffold(
         appBar: AppBar(
           title: Center(
@@ -30,31 +35,41 @@ class HomeScreen extends StatelessWidget {
 
             Row(
               children: [
-                Padding(padding: EdgeInsets.symmetric(horizontal: 5,vertical: 15)),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                    horizontal: 5,
+                        vertical: 15
+                    )
+                ),
                 Icon(Icons.calendar_today),
                 Text('October 30'),
               ],
             ),
             Row(
               children: [
-                Padding(padding: EdgeInsets.symmetric(horizontal: 5,vertical: 15)),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 15
+                    )
+                ),
                 Icon(Icons.location_city),
                 Text('San Francisco'),
               ],
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-            ),
+
+            Align(alignment: Alignment.centerLeft,),
 
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0)
-            ),
-
-            OutlinedButton(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+            child: OutlinedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
                 ),
                 onPressed: (){
+                  if(formKey.currentState!.validate()){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                  }
                   Navigator.pushNamed(
                       context, '/SigninPage'
                   );
@@ -62,7 +77,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black),
             )
-            ),
+            ),),
             TextFormField(
               decoration: InputDecoration(),
             ),
